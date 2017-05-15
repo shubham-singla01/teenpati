@@ -19,17 +19,17 @@ script(type='text/ng-template',id='table.dealer.html')
 script(type='text/ng-template',id='table.bet.html')
 	div.bet-info
 		div.bet.alert.alert-warning
-			span.pot-amount ${{table.amount| number}} 
+			span.pot-amount Rs {{table.amount| number}} 
 
 script(type='text/ng-template',id='table.info.html')
 	div.table-info(ng-show="table && table.gameStarted")
 		div.info.alert.alert-info
 			span.caption Boot Value:
-			span.value.boot-amount ${{table.boot | number}} 
+			span.value.boot-amount Rs {{table.boot | number}} 
 			span.caption Pot Limit:
-			span.value.pot-limit ${{table.potLimit | number}} 
+			span.value.pot-limit Rs {{table.potLimit | number}} 
 			span.caption Max Bet:
-			span.value.max-bet ${{table.maxBet | number}} 
+			span.value.max-bet Rs {{table.maxBet | number}} 
 
 
 script(type='text/ng-template',id='table.notifications.html')
@@ -47,7 +47,7 @@ script(type='text/ng-template',id='side.player.html')
 				div.last-action.alert-warning {{player.lastAction}}
 				div.pic.icon
 				div.name(slot='{{player.slot}}') {{ player.playerInfo.userName}}
-				div.last-bet ${{ player.lastBet || player.playerInfo.chips | number}}
+				div.last-bet Rs {{ player.lastBet || player.playerInfo.chips | number}}
 			div.cards(ng-if="table && table.gameStarted && player && player.active && !player.packed")
 				div.cards-set(playing-cards-set="",slot='player.slot',card-set='player.cardSet',lmargin="20")
 
@@ -62,14 +62,14 @@ script(type='text/ng-template',id='main.player.html')
 					div.last-action {{player.lastAction}}
 					span.name(slot='{{player.slot}}')   {{player.playerInfo.userName}}
 					span.icon.icon-chips
-					span.chips ${{player.playerInfo.chips | number}}
+					span.chips Rs {{player.playerInfo.chips | number}}
 			div.cards
 				div.cards-set(ng-show='table && table.gameStarted && player && player.active && !player.packed',playing-cards-set="",player="player",see-my-cards="seeMyCards()",slot='player.slot',card-set='player.cardSet')
 	form.form.horizontal
 		div.actions.form-group(ng-show='player.turn && !player.winner')
 			button.btn.btn-danger.pack(ng-disabled='disableActions',ng-click='pack()') Pack
 			button.btn.btn-danger.minus(ng-disabled='disableMinus || disableActions',ng-click='minus()') -
-			input.disable.bet-value.form-control(value="${{possibleBet | number}}",readonly="readonly",slot='{{player.slot}}',cid='{{player.id}}',tableid='{{player.tableId}}')
+			input.disable.bet-value.form-control(value="Rs {{possibleBet | number}}",readonly="readonly",slot='{{player.slot}}',cid='{{player.id}}',tableid='{{player.tableId}}')
 			button.btn.btn-success.plus(ng-disabled='disablePlus || disableActions',ng-click='plus()') +
 			button.btn.btn-primary.blind(ng-disabled='player.playerInfo.chips<possibleBet || disableActions',ng-show='player.cardSet.closed',ng-click='blind()') Blind
 			button.btn.btn-primary.chaal(ng-disabled='player.playerInfo.chips<possibleBet || disableActions',ng-show='!player.cardSet.closed',ng-click='chaal()') Chal
